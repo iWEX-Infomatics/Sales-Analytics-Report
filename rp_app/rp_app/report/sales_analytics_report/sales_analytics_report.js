@@ -1,5 +1,6 @@
 // Copyright (c) 2025, RP_APP and contributors
 // For license information, please see license.txt
+// For support, use https://www.iwex.in/helpdesk/tickets
 
 frappe.query_reports["Sales Analytics Report"] = {
 	"filters": [
