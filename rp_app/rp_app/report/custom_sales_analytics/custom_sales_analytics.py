@@ -157,7 +157,7 @@ class Analytics(object):
 				as_dict=1,
 			)
 
-		elif self.filters["value_quantity"] == "QuantityWscheme":
+		elif self.filters["value_quantity"] == "QuantityWschm":
 			value_field = "total_qty"
 			self.entries = frappe.db.sql(
 				""" select s.order_type as entity, s.{value_field} * i.weight_per_unit as value_field, s.{date_field}
@@ -166,7 +166,7 @@ class Analytics(object):
 			""".format(
 					date_field=self.date_field, value_field=value_field, doctype=self.filters.doc_type
 				),
-				(self.filters.company, self.filters.from_date, self.filters.to_date,'Scheme'),
+				(self.filters.company, self.filters.from_date, self.filters.to_date,'Schm'),
 				as_dict=1,
 			)
 
@@ -219,7 +219,7 @@ class Analytics(object):
 			    ff3 = self.entries[index]
 			    ff3['value_field'] = ff[0]['yy']
 
-		elif self.filters["value_quantity"] == "QuantityWscheme":
+		elif self.filters["value_quantity"] == "QuantityWschm":
 			value_field = "total_qty as value_field"
 
 			if self.filters.tree_type == "Customer":
@@ -240,7 +240,7 @@ class Analytics(object):
 			)
 			res2 = [a_dict["name"] for a_dict in self.entries]
 			for i in self.entries:
-			    ff = frappe.db.sql(f""" select Sum(qty*weight_per_unit) as yy from `tab{self.filters.doc_type} Item` where parent = '{i.name}'  and item_code NOT LIKE '%Scheme%' """,as_dict=1)
+			    ff = frappe.db.sql(f""" select Sum(qty*weight_per_unit) as yy from `tab{self.filters.doc_type} Item` where parent = '{i.name}'  and item_code NOT LIKE '%Schm%' """,as_dict=1)
 			    index = res2.index(i.name)
 			    ff3 = self.entries[index]
 			    ff3['value_field'] = ff[0]['yy']
@@ -283,19 +283,19 @@ class Analytics(object):
 			)	
 
 
-		elif self.filters["value_quantity"] == "QuantityWscheme":
+		elif self.filters["value_quantity"] == "QuantityWschm":
 			value_field = "qty"
 			self.entries = frappe.db.sql(
 				f"""
 				select i.item_code as entity, i.item_name as entity_name, i.stock_uom, i.{value_field} * i.weight_per_unit as value_field, s.{self.date_field}
 				from `tab{self.filters.doc_type} Item` i , `tab{self.filters.doc_type}` s
 				where s.name = i.parent and i.docstatus = 1 and s.company = '{self.filters.company}'
-				and s.{self.date_field} between '{self.filters.from_date}' and '{self.filters.to_date}' and  i.item_code NOT LIKE '%Scheme%'
+				and s.{self.date_field} between '{self.filters.from_date}' and '{self.filters.to_date}' and  i.item_code NOT LIKE '%Schm%'
 			""",
 			# .format(
 			# 		date_field=self.date_field, value_field=value_field, doctype=self.filters.doc_type
 			# 	),
-			# 	(self.filters.company, self.filters.from_date, self.filters.to_date,f'Scheme'),
+			# 	(self.filters.company, self.filters.from_date, self.filters.to_date,f'Schm'),
 				as_dict=1
 			)	
 
@@ -362,7 +362,7 @@ class Analytics(object):
 			    ff3 = self.entries[index]
 			    ff3['value_field'] = ff[0]['yy']
 
-		elif self.filters["value_quantity"] == "QuantityWscheme":
+		elif self.filters["value_quantity"] == "QuantityWschm":
 			value_field = "total_qty as value_field"
 			if self.filters.tree_type == "Customer Group":
 				entity_field = "customer_group as entity"
@@ -384,7 +384,7 @@ class Analytics(object):
 			)
 			res2 = [a_dict["name"] for a_dict in self.entries]
 			for i in self.entries:
-			    ff = frappe.db.sql(f""" select Sum(qty*weight_per_unit) as yy from `tab{self.filters.doc_type} Item` where parent = '{i.name}' and item_code NOT LIKE '%Scheme%'   """,as_dict=1)
+			    ff = frappe.db.sql(f""" select Sum(qty*weight_per_unit) as yy from `tab{self.filters.doc_type} Item` where parent = '{i.name}' and item_code NOT LIKE '%Schm%'   """,as_dict=1)
 			    index = res2.index(i.name)
 			    ff3 = self.entries[index]
 			    ff3['value_field'] = ff[0]['yy']
@@ -433,7 +433,7 @@ class Analytics(object):
 			)
 		
 
-		elif self.filters["value_quantity"] == "QuantityWscheme":
+		elif self.filters["value_quantity"] == "QuantityWschm":
 			value_field = "qty*i.weight_per_unit)"
 			
 			self.entries = frappe.db.sql(
@@ -441,7 +441,7 @@ class Analytics(object):
 				select i.item_group as entity,sum(i.{value_field} as value_field, s.{self.date_field},s.name as name
 				from `tab{self.filters.doc_type} Item` i , `tab{self.filters.doc_type}` s
 				where s.name = i.parent and i.docstatus = 1 and s.company = '{self.filters.company}'
-				and s.{self.date_field} between '{self.filters.from_date}' and '{self.filters.to_date}'  and  i.item_code NOT LIKE '%Scheme%'
+				and s.{self.date_field} between '{self.filters.from_date}' and '{self.filters.to_date}'  and  i.item_code NOT LIKE '%Schm%'
 				group by s.name,i.item_group
 
 				""",as_dict=1,)
@@ -487,7 +487,7 @@ class Analytics(object):
 			    ff3['value_field'] = ff[0]['yy']
 
 
-		elif self.filters["value_quantity"] == "QuantityWscheme":
+		elif self.filters["value_quantity"] == "QuantityWschm":
 			value_field = "total_qty as value_field"
 
 			entity = "project as entity"
@@ -505,7 +505,7 @@ class Analytics(object):
 
 			res2 = [a_dict["name"] for a_dict in self.entries]
 			for i in self.entries:
-			    ff = frappe.db.sql(f""" select Sum(qty*weight_per_unit) as yy from `tab{self.filters.doc_type} Item` where parent = '{i.name}'  and item_code NOT LIKE '%Scheme%'    """,as_dict=1)
+			    ff = frappe.db.sql(f""" select Sum(qty*weight_per_unit) as yy from `tab{self.filters.doc_type} Item` where parent = '{i.name}'  and item_code NOT LIKE '%Schm%'    """,as_dict=1)
 			    index = res2.index(i.name)
 			    ff3 = self.entries[index]
 			    ff3['value_field'] = ff[0]['yy']
