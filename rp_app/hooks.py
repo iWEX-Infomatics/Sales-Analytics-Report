@@ -1,8 +1,8 @@
 app_name = "rp_app"
 app_title = "RP_APP"
-app_publisher = "RP_APP"
+app_publisher = "Ravi Products"
 app_description = "RP_APP"
-app_email = "madhu@yopmail.com"
+app_email = "emails@iwex.in"
 app_license = "mit"
 
 # Apps
